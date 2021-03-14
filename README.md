@@ -3,5 +3,5 @@ A project, using the OpenGL API and GLSL code, to produce a terrain which can be
 
 The project contains the following implementations:
 
-> Tessellation Shaders to control the level of detail of the terrain (Distant dependant) using a variety of methods (Step, Linear and Exponential)
-> Bloom post processing along with the Blinn-Phong lighting model
+* Tessellation Shaders to control the level of detail of the terrain (Distant dependant) using a variety of methods (Step, Linear and Exponential)
+* Bloom post processing along with the Blinn-Phong lighting model
