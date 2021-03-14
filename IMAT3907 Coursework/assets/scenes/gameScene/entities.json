@@ -1,0 +1,198 @@
+{
+	"entities": 
+	[
+		{
+			"name": "Player1",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 3.0, 0.0],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Camera",
+					"type": "Camera",
+					"skybox": [{"model" : "cube", "material": "skyboxMaterial"}],
+					"clearColour": [ 0.1, 0.2, 0.3, 1.0],
+					"front": [ 0.0, 0.0, -1.0],
+					"up": [ 0.0, 1.0, 0.0],
+					"worldUp": [ 0.0, 1.0, 0.0],
+					"Yaw": 90.0,
+					"Pitch": 0.0,
+					"Zoom": 70.0,
+					"setMainCamera": true
+				},
+				{
+					"name": "Light1",
+					"type": "DirectionalLight",
+					"direction": [ -0.2, -1.0, -0.3 ],
+					"ambient": [ 0.01, 0.01, 0.01 ],
+					"diffuse": [ 0.8, 0.8, 0.8 ],
+					"specular": [ 0.1, 0.1, 0.1 ]
+				},
+				{
+					"name": "CController",
+					"type": "CharacterController",
+					"speed": 22.0,
+					"sensitivity": 0.15,
+					"frozen": false
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Player"
+				}
+			]
+		},
+		{
+			"name": "Cyborg1",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ -12.0, 30.0, 19.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "MeshRender1",
+					"type": "MeshRender3D",
+					"modelName": "cyborg",
+					"materialName": ""
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Cyborg"
+				}
+			]
+		},
+		{
+			"name": "Cube2",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 10.0, 2.0, 10.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 0.25, 0.25, 0.25 ]
+				},
+				{
+					"name": "MeshRender1",
+					"type": "MeshRender3D",
+					"modelName": "sphere",
+					"materialName": "lightSourceMaterial"
+				},
+				{
+					"name": "Light1",
+					"type": "PointLight",
+					"ambient": [ 0.2, 0.2, 0.2 ],
+					"diffuse": [ 5.0, 0.0, 0.0 ],
+					"specular": [ 1.0, 1.0, 1.0 ],
+					"constant": 1.0,
+					"linear": 0.35,
+					"quadratic": 0.44
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "LightTest"
+				}
+			]
+		},
+		{
+			"name": "LightSource6",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ -12.5, 300.12, 2.3],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 5.0, 5.0, 5.0 ]
+				},
+				{
+					"name": "MeshRender1",
+					"type": "MeshRender3D",
+					"modelName": "sphere",
+					"materialName": "lightSourceMaterial"
+				},
+				{
+					"name": "Light1",
+					"type": "PointLight",
+					"ambient": [ 0.2, 0.2, 0.2 ],
+					"diffuse": [ 100.0, 100.0, 100.0 ],
+					"specular": [ 1.0, 1.0, 1.0 ],
+					"constant": 1.0,
+					"linear": 0.09,
+					"quadratic": 0.032
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "LightTest"
+				}
+			]
+		},
+		{
+			"name": "FPSText",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 5.0, 45.0, 0.2 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 400.0, 400.0, 1.0 ]
+				},
+				{
+					"name": "Text1",
+					"type": "Text",
+					"text": "",
+					"colour": [ 1.0, 1.0, 1.0, 1.0 ],
+					"fontName": "Arial"
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "FPSCounter"
+				}
+			]
+		},
+		{
+			"name": "Terrain1",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 0.0, 0.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Terrain"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,155 @@
+{
+	"entities": 
+	[
+		{
+			"name": "Player1",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 0.0, 0.0],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Camera",
+					"type": "Camera",
+					"clearColour": [ 0.1, 0.2, 0.3, 1.0],
+					"front": [ 0.0, 0.0, -1.0],
+					"up": [ 0.0, 1.0, 0.0],
+					"worldUp": [ 0.0, 1.0, 0.0],
+					"Yaw": 270.0,
+					"Pitch": 0.0,
+					"Zoom": 45.0,
+					"setMainCamera": true
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Player"
+				}
+			]
+		},
+		{
+			"name": "TitleText",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 310.0, 130.0, 1.0 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 311.0, 32.0, 1.0 ]
+				},
+				{
+					"name": "Text1",
+					"type": "Text",
+					"text": "IMAT3907 Coursework",
+					"colour": [ 1.0, 1.0, 1.0, 1.0 ],
+					"fontName": "Arial"
+				}
+			]
+		},
+		{
+			"name": "AuthorText",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 10.0, 750.0, 1.0 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 311.0, 32.0, 1.0 ]
+				},
+				{
+					"name": "Text1",
+					"type": "Text",
+					"text": "By Daniel Bullin",
+					"colour": [ 1.0, 1.0, 1.0, 1.0 ],
+					"fontName": "Arial"
+				}
+			]
+		},
+		{
+			"name": "PlayGame",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 390.0, 260.0, 1.0 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 311.0, 32.0, 1.0 ]
+				},
+				{
+					"name": "Text1",
+					"type": "Text",
+					"text": "Play Game",
+					"colour": [ 1.0, 1.0, 1.0, 1.0 ],
+					"fontName": "Arial"
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "MenuText"
+				}
+			]
+		},
+		{
+			"name": "QuitText",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 475.0, 530.0, 0.5 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 68.0, 30.0, 1.0 ]
+				},
+				{
+					"name": "Text1",
+					"type": "Text",
+					"text": "Quit",
+					"colour": [ 1.0, 1.0, 1.0, 1.0 ],
+					"fontName": "Arial"
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "MenuText"
+				}
+			]
+		},
+		{
+			"name": "MenuImage",
+			"layer": "UI",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 512.0, 384.0, -1.0 ],
+					"rotation": [ 0.0, 0.0, 0.0 ],
+					"scale": [ 1024.0, 768.0, 1.0 ]
+				},
+				{
+					"name": "MeshRender1",
+					"type": "MeshRender2D",
+					"materialName": "menuImageMaterial"
+				}
+			]
+		}
+	]
+}

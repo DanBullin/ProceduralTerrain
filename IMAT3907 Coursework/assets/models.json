@@ -1,0 +1,25 @@
+{
+	"models": 
+	[
+		{ 
+			"name": "plane", 
+			"modelFilePath": "assets/models/plane/plane.obj",
+			"materialFilePath": ""
+		},
+		{ 
+			"name": "cube", 
+			"modelFilePath": "assets/models/cube/cube.obj",
+			"materialFilePath": ""
+		},
+		{ 
+			"name": "sphere", 
+			"modelFilePath": "assets/models/sphere/sphere.obj",
+			"materialFilePath": ""
+		},
+		{ 
+			"name": "cyborg", 
+			"modelFilePath": "assets/models/cyborg/cyborg.obj",
+			"materialFilePath": "assets/models/cyborg/cyborg.txt"
+		}
+	]	
+}

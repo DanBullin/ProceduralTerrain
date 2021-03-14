@@ -1,0 +1,47 @@
+{
+	"frameBuffers": 
+	[
+		{ 
+			"name": "defaultFBO",
+			"useDefault": true,
+			"layout": [ ],
+			"dimensions": [],
+			"useSceneSize": false
+		},
+		{ 
+			"name": "finalFBO",
+			"useDefault": false,
+			"layout": [ "Colour", true, "DepthAndStencil", false ],
+			"dimensions": [],
+			"useSceneSize": true
+		},
+		{ 
+			"name": "hdrFBO",
+			"useDefault": false,
+			"layout": [ "Colour16", true, "Colour16", true, "DepthAndStencil", false ],
+			"dimensions": [],
+			"useSceneSize": true
+		},
+		{ 
+			"name": "pingPongFBO1",
+			"useDefault": false,
+			"layout": [ "Colour16", true ],
+			"dimensions": [],
+			"useSceneSize": true
+		},
+		{ 
+			"name": "pingPongFBO2",
+			"useDefault": false,
+			"layout": [ "Colour16", true ],
+			"dimensions": [],
+			"useSceneSize": true
+		},
+		{ 
+			"name": "applyBloomFBO",
+			"useDefault": false,
+			"layout": [ "Colour", true, "DepthAndStencil", false ],
+			"dimensions": [],
+			"useSceneSize": true
+		}
+	]	
+}
