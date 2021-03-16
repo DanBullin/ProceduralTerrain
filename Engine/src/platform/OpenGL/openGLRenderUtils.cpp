@@ -229,6 +229,9 @@ namespace Engine
 	*/
 	void OpenGLRenderUtils::draw(const uint32_t drawCount)
 	{
+		if (s_patchDrawing)
+			glDrawElements(GL_PATCHES, drawCount, GL_UNSIGNED_INT, nullptr);
+		else
 			glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, nullptr);
 
 		if (ResourceManager::getConfigValue(Config::PrintOpenGLDebugMessages))
