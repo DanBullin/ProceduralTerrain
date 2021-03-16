@@ -18,6 +18,7 @@ layout(std140) uniform Camera
 {
 	mat4 u_view;
 	mat4 u_projection;
+	vec3 u_viewPos;
 };
 
 void main()

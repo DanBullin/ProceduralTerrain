@@ -155,6 +155,11 @@ namespace Engine
 		m_cameraUBO->uploadData("u_view", static_cast<void*>(&cam->getViewMatrix(true)));
 		m_cameraUBO->uploadData("u_projection", static_cast<void*>(&cam->getProjectionMatrix(true)));
 		m_cameraUBO->uploadData("u_viewPos", static_cast<void*>(&cam->getWorldPosition()));
+
+		// Tessellation UBO
+		auto tessUBO = ResourceManager::getResource<UniformBuffer>("TessellationUBO");
+		uint32_t useTess = 1;
+		tessUBO->uploadData("u_useTessellation", static_cast<void*>(&useTess));
 	}
 
 	//! onRender()
