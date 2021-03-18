@@ -11,6 +11,7 @@
 #include "independent/systems/systems/windowManager.h"
 #include "independent/systems/systems/timerSystem.h"
 #include "independent/systems/systems/resourceManager.h"
+#include "independent/systems/systems/threadManager.h"
 #include "independent/entities/entity.h"
 
 namespace Engine
@@ -108,6 +109,12 @@ namespace Engine
 
 			window->onWindowResize(e);
 			s_currentScene->getMainCamera()->updateProjection(window->getProperties().getSizef());
+
+			auto framebuffers = ResourceManager::getResourcesOfType<FrameBuffer>(ResourceType::FrameBuffer);
+			for (auto& fbo : framebuffers)
+			{
+				fbo->resize(e.getSize());
+			}
 
 			// Pass input event to layers and entities 
 			if (s_currentScene)
@@ -563,6 +570,8 @@ namespace Engine
 
 			// Update Active scene
 			if (s_currentScene) s_currentScene->onUpdate(timestep, totalTime);
+
+			ThreadManager::onUpdate(timestep, totalTime);
 
 			// Update all registered windows
 			for (auto& window : WindowManager::getRegisteredWindows())
