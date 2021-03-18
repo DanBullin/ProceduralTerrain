@@ -348,7 +348,11 @@ namespace Engine
 					SceneManager::setActiveScene("mainMenu", true);
 					window->setCursorInputMode(CursorInputMode::Visible);
 				}
-				else ENGINE_ERROR("No main menu to return to!");
+			}
+
+			if (e.getKeyCode() == Keys::F5)
+			{
+				window->setFullscreen(!window->getProperties().getFullScreen());
 			}
 		}
 	}
