@@ -174,13 +174,13 @@ namespace Engine
 		// Go through each 3D object (including light source objects) + skybox and render them to HDR buffer + brightness texture
 		for (auto& entity : entities)
 		{
-			if (entity->getLayer()->getDisplayed() && entity->getDisplay() && entity->getName() != "Terrain1")
+			if (entity->getLayer()->getDisplayed() && entity->getDisplay())
 			{
 				if (entity->containsComponent<MeshRender3D>())
 					entity->getComponent<MeshRender3D>()->onRender();
 
 				if (entity->containsComponent<NativeScript>())
-					entity->getComponent<NativeScript>()->onRender(Renderers::Renderer3D);
+					entity->getComponent<NativeScript>()->onRender(Renderers::Renderer3D, "Default");
 			}
 		}
 
@@ -190,21 +190,28 @@ namespace Engine
 
 		Renderer3D::end();
 
-		if (m_attachedScene->getEntity("Terrain1"))
+		//RenderUtils::enableFaceCulling(true);
+		RenderUtils::enablePatchDrawing(true);
+
+		Renderer3D::begin();
+
+		for (auto& entity : entities)
 		{
-			//RenderUtils::enableFaceCulling(true);
-			RenderUtils::enablePatchDrawing(true);
+			if (entity->getLayer()->getDisplayed() && entity->getDisplay())
+			{
+				if (entity->containsComponent<MeshRender3D>())
+					entity->getComponent<MeshRender3D>()->onRender();
 
-			Renderer3D::begin();
-
-			m_attachedScene->getEntity("Terrain1")->getComponent<NativeScript>()->onRender(Renderers::Renderer3D);
-
-			Renderer3D::end();
-
-			RenderUtils::enablePatchDrawing(false);
-			RenderUtils::enableWireframe(false);
-			//RenderUtils::enableFaceCulling(false);
+				if (entity->containsComponent<NativeScript>())
+					entity->getComponent<NativeScript>()->onRender(Renderers::Renderer3D, "Terrain");
+			}
 		}
+
+		Renderer3D::end();
+
+		RenderUtils::enablePatchDrawing(false);
+		RenderUtils::enableWireframe(false);
+		//RenderUtils::enableFaceCulling(false);
 	}
 
 	//! getFrameBuffer()

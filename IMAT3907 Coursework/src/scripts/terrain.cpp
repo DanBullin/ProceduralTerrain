@@ -11,108 +11,66 @@
 #include "independent/systems/components/scene.h"
 #include "independent/rendering/renderers/renderer3D.h"
 
-TerrainVertex Terrain::makeVertex(int x, int z, float xTotalLength, float zTotalLength)
-{
-	return { { x, 0.f, z} , { (float)x / xTotalLength, (float)z / zTotalLength } };
-}
-
 //! Terrain()
 Terrain::Terrain()
 {
-	m_model = nullptr;
-	m_width = 250;
-	m_height = 250;
-	m_stepSize = 30;
+	m_chunkSize = { 50, 50 };
+	m_chunkStepSize = 10;
+	Chunk::createGeometry(m_chunkSize.x, m_chunkSize.y, m_chunkStepSize);
+
+	m_tessUBO = ResourceManager::getResource<UniformBuffer>("TessellationUBO");
 	m_drawWireframe = false;
 	m_tessellationEquation = 1;
 	m_generateY = true;
 	m_scale = 100.f;
-	m_octaves = 3;
+	m_octaves = 10;
 	m_frequency = 0.005f;
 	m_amplitude = 100.f;
-	m_amplitudeDivisor = 3.f;
+	m_amplitudeDivisor = 2.f;
 	m_frequencyMultiplier = 2.f;
+
+	m_chunk = Chunk({ 0.f, 0.f, 0.f });
 }
 
 //! ~Terrain()
 Terrain::~Terrain()
 {
-	if (m_model) delete m_model;
 }
 
 //! onAttach()
 void Terrain::onAttach()
 {
-	std::vector<TerrainVertex> vertices;
-	std::vector<uint32_t> indices;
+}
 
-	// Generating the vertices
-	for (int z = 0; z < m_height; z++)
-	{
-		int offsetZ = z * m_stepSize;
-		float zLength = static_cast<float>(m_height) * static_cast<float>(m_stepSize);
-
-		for (int x = 0; x < m_width; x++)
-		{
-			int offsetX = x * m_stepSize;
-			float xLength = static_cast<float>(m_width) * static_cast<float>(m_stepSize);
-			vertices.push_back(makeVertex(offsetX, offsetZ, xLength, zLength));
-			vertices.push_back(makeVertex(offsetX + m_stepSize, offsetZ, xLength, zLength));
-			vertices.push_back(makeVertex(offsetX + m_stepSize, offsetZ + m_stepSize, xLength, zLength));
-			vertices.push_back(makeVertex(offsetX, offsetZ + m_stepSize, xLength, zLength));
-		}
-	}
-
-	// Generating the indices
-	uint32_t count = 0;
-	for (int z = 0; z < m_height; z++)
-	{
-		for (int x = 0; x < m_width; x++)
-		{
-			indices.push_back(count);
-			indices.push_back(count+1);
-			indices.push_back(count+3);
-			indices.push_back(count+1);
-			indices.push_back(count+2);
-			indices.push_back(count+3);
-			count += 4;
-		}
-	}
-
-	// Create a piece of geometry using local vertices and indices information
-	Geometry3D geometry;
-	geometry.VertexBuffer = ResourceManager::getResource<VertexBuffer>("TerrainVertexBuffer");
-	Renderer3D::addGeometry(vertices, indices, geometry);
-
-	Model3D* newTerrain = new Model3D("Terrain");
-	newTerrain->getMeshes().push_back(Mesh3D(geometry));
-	newTerrain->getMeshes().at(0).setMaterial(ResourceManager::getResource<Material>("TerrainMaterial"));
-	m_model = newTerrain;
+void Terrain::onPostUpdate(const float timestep, const float totalTime)
+{
+	glm::vec3 playerPos = getParent()->getParentScene()->getEntity("Player1")->getComponent<Transform>()->getPosition();
+	int chunkX = round(playerPos.x / (m_chunkSize.x * m_chunkStepSize));
+	int chunkY = round(playerPos.z / (m_chunkSize.y * m_chunkStepSize));
+	ENGINE_INFO("{0}, {1}", chunkX, chunkY);
 }
 
 //! onRender
 /*
 \param renderer a const Renderers - The renderer to use
+\param renderState a const std::string& - The render state
 */
-void Terrain::onRender(const Renderers renderer)
+void Terrain::onRender(const Renderers renderer, const std::string& renderState)
 {
-	if (renderer == Renderers::Renderer3D)
+	if (renderer == Renderers::Renderer3D && renderState == "Terrain")
 	{
-		auto tessUBO = ResourceManager::getResource<UniformBuffer>("TessellationUBO");
-		tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&m_tessellationEquation));
-		tessUBO->uploadData("u_generateY", static_cast<void*>(&m_generateY));
-		tessUBO->uploadData("u_scale", static_cast<void*>(&m_scale));
-		tessUBO->uploadData("u_octaves", static_cast<void*>(&m_octaves));
-		tessUBO->uploadData("u_frequency", static_cast<void*>(&m_frequency));
-		tessUBO->uploadData("u_amplitude", static_cast<void*>(&m_amplitude));
-		tessUBO->uploadData("u_amplitudeDivisor", static_cast<void*>(&m_amplitudeDivisor));
-		tessUBO->uploadData("u_frequencyMultiplier", static_cast<void*>(&m_frequencyMultiplier));
-
+		m_tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&m_tessellationEquation));
+		m_tessUBO->uploadData("u_generateY", static_cast<void*>(&m_generateY));
+		m_tessUBO->uploadData("u_scale", static_cast<void*>(&m_scale));
+		m_tessUBO->uploadData("u_octaves", static_cast<void*>(&m_octaves));
+		m_tessUBO->uploadData("u_frequency", static_cast<void*>(&m_frequency));
+		m_tessUBO->uploadData("u_amplitude", static_cast<void*>(&m_amplitude));
+		m_tessUBO->uploadData("u_amplitudeDivisor", static_cast<void*>(&m_amplitudeDivisor));
+		m_tessUBO->uploadData("u_frequencyMultiplier", static_cast<void*>(&m_frequencyMultiplier));
 		if (m_drawWireframe) RenderUtils::enableWireframe(true);
-		for (auto& mesh : m_model->getMeshes())
-		{
-			Renderer3D::submit("Terrain", mesh.getGeometry(), mesh.getMaterial(), getParent()->getComponent<Transform>()->getModelMatrix());
-		}
+
+		// Draw all chunks
+		m_chunk.onRender(renderer, renderState);
 	}
 }
 
@@ -147,5 +105,15 @@ void Terrain::onKeyRelease(KeyReleasedEvent & e, const float timestep, const flo
 	if (e.getKeyCode() == Keys::M)
 	{
 		m_scale -= 10.f;
+	}
+
+	if (e.getKeyCode() == Keys::K)
+	{
+		m_amplitude += 20.f;
+	}
+
+	if (e.getKeyCode() == Keys::L)
+	{
+		m_amplitude -= 20.f;
 	}
 }
