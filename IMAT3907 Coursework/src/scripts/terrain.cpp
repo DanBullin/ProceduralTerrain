@@ -8,6 +8,7 @@
 #include "scripts/terrain.h"
 #include "independent/entities/entity.h"
 #include "independent/systems/systems/log.h"
+#include "independent/systems/components/scene.h"
 #include "independent/rendering/renderers/renderer3D.h"
 
 TerrainVertex Terrain::makeVertex(int x, int z, float xTotalLength, float zTotalLength)
@@ -19,9 +20,18 @@ TerrainVertex Terrain::makeVertex(int x, int z, float xTotalLength, float zTotal
 Terrain::Terrain()
 {
 	m_model = nullptr;
-	m_width = 50;
-	m_height = 50;
-	m_stepSize = 10;
+	m_width = 250;
+	m_height = 250;
+	m_stepSize = 30;
+	m_drawWireframe = false;
+	m_tessellationEquation = 1;
+	m_generateY = true;
+	m_scale = 100.f;
+	m_octaves = 3;
+	m_frequency = 0.005f;
+	m_amplitude = 100.f;
+	m_amplitudeDivisor = 3.f;
+	m_frequencyMultiplier = 2.f;
 }
 
 //! ~Terrain()
@@ -80,10 +90,25 @@ void Terrain::onAttach()
 	m_model = newTerrain;
 }
 
+//! onRender
+/*
+\param renderer a const Renderers - The renderer to use
+*/
 void Terrain::onRender(const Renderers renderer)
 {
 	if (renderer == Renderers::Renderer3D)
 	{
+		auto tessUBO = ResourceManager::getResource<UniformBuffer>("TessellationUBO");
+		tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&m_tessellationEquation));
+		tessUBO->uploadData("u_generateY", static_cast<void*>(&m_generateY));
+		tessUBO->uploadData("u_scale", static_cast<void*>(&m_scale));
+		tessUBO->uploadData("u_octaves", static_cast<void*>(&m_octaves));
+		tessUBO->uploadData("u_frequency", static_cast<void*>(&m_frequency));
+		tessUBO->uploadData("u_amplitude", static_cast<void*>(&m_amplitude));
+		tessUBO->uploadData("u_amplitudeDivisor", static_cast<void*>(&m_amplitudeDivisor));
+		tessUBO->uploadData("u_frequencyMultiplier", static_cast<void*>(&m_frequencyMultiplier));
+
+		if (m_drawWireframe) RenderUtils::enableWireframe(true);
 		for (auto& mesh : m_model->getMeshes())
 		{
 			Renderer3D::submit("Terrain", mesh.getGeometry(), mesh.getMaterial(), getParent()->getComponent<Transform>()->getModelMatrix());
@@ -91,10 +116,36 @@ void Terrain::onRender(const Renderers renderer)
 	}
 }
 
+//! onKeyRelease()
+/*!
+\param e a KeyReleasedEvent& - A key release event
+\param timestep a const float - The timestep
+\param totalTime a const float - The total time of the application
+*/
 void Terrain::onKeyRelease(KeyReleasedEvent & e, const float timestep, const float totalTime)
 {
 	if (e.getKeyCode() == Keys::Z)
 	{
-		ResourceManager::setConfigValue(Config::ShowTerrainWireframe, !ResourceManager::getConfigValue(Config::ShowTerrainWireframe));
+		m_drawWireframe = !m_drawWireframe;
+	}
+
+	if (e.getKeyCode() == Keys::X)
+	{
+		m_tessellationEquation = !m_tessellationEquation;
+	}
+
+	if (e.getKeyCode() == Keys::C)
+	{
+		m_generateY = !m_generateY;
+	}
+
+	if (e.getKeyCode() == Keys::N)
+	{
+		m_scale += 10.f;
+	}
+
+	if (e.getKeyCode() == Keys::M)
+	{
+		m_scale -= 10.f;
 	}
 }

@@ -48,12 +48,6 @@ namespace Engine
 			return "[PrintResourcesInDestructor]";
 		case Config::ConfigData::PrintOpenGLDebugMessages:
 			return "[PrintOpenGLDebugMessages]";
-		case Config::ConfigData::ShowTerrainWireframe:
-			return "[ShowTerrainWireframe]";
-		case Config::ConfigData::TessellationEquation:
-			return "[TessellationEquation]";
-		case Config::ConfigData::GenerateTerrainY:
-			return "[GenerateTerrainY]";
 		default: return 0;
 		}
 	}
@@ -91,9 +85,6 @@ namespace Engine
 			s_configValues.push_back(configData["bloomBlurFactor"]);
 			s_configValues.push_back(configData["printResourcesInDestructor"]);
 			s_configValues.push_back(configData["printOpenGLDebugMessages"]);
-			s_configValues.push_back(configData["showTerrainWireframe"]);
-			s_configValues.push_back(configData["tessellationEquation"]);
-			s_configValues.push_back(configData["generateTerrainY"]);
 		}
 	}
 

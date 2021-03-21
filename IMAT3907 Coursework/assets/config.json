@@ -35,8 +35,5 @@
 	"useBloom": 1,
 	"bloomBlurFactor": 50,
 	"printResourcesInDestructor": 0,
-	"printOpenGLDebugMessages": 0,
-	"showTerrainWireframe": 1,
-	"tessellationEquation": 0,
-	"generateTerrainY": 0
+	"printOpenGLDebugMessages": 0
 }

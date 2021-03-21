@@ -23,6 +23,16 @@ private:
 	int m_stepSize; //!< The size of a tile in width
 	Model3D* m_model; //!< The model of the terrain
 
+	bool m_drawWireframe; //!< Draw the terrain in wireframe
+	uint32_t m_tessellationEquation; //!< The equation to use for tessellation
+	bool m_generateY; //!< Generate the y valus for generation
+	int m_octaves; //!< The number of octaves
+	float m_scale; //!< The scale factor for the terrain
+	float m_frequency; //!< The frequency
+	float m_amplitude; //!< The amplitude
+	float m_amplitudeDivisor; //!< The amplitude divisor
+	float m_frequencyMultiplier; //!< The frequency multiplier
+
 	TerrainVertex makeVertex(int x, int z, float xTotalLength, float zTotalLength);
 public:
 	Terrain(); //!< Constructor

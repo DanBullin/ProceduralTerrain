@@ -36,7 +36,7 @@ namespace Engine
 		{
 			MaxSubTexturesPerMaterial = 0, VertexCapacity3D = 1, IndexCapacity3D = 2, BatchCapacity3D = 3, BatchCapacity2D = 4,
 			MaxLayersPerScene = 5, MaxRenderPassesPerScene = 6, MaxLightsPerDraw = 7, UseBloom = 8, BloomBlurFactor = 9, PrintResourcesInDestructor = 10,
-			PrintOpenGLDebugMessages = 11, ShowTerrainWireframe = 12, TessellationEquation = 13, GenerateTerrainY = 14
+			PrintOpenGLDebugMessages = 11
 		};
 	}
 
