@@ -126,7 +126,6 @@ namespace Engine
 					if (it->second)
 					{
 						it->second->onUpdate(timestep, totalTime);
-
 						for (auto& component : it->second->getAllComponents())
 						{
 							// Check if component is valid
@@ -186,8 +185,6 @@ namespace Engine
 
 			return m_rootEntities[name];
 		}
-		else
-			ENGINE_ERROR("[Scene::getEntity] Cannot get entity named: {0}.", name);
 
 		// Can't find entity
 		return nullptr;

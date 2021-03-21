@@ -23,7 +23,8 @@
 #include "independent/rendering/renderPasses/passes/secondPass.h"
 #include "independent/rendering/renderPasses/passes/thirdPass.h"
 #include "independent/rendering/renderPasses/passes/fourthPass.h"
-#include "independent/rendering/renderPasses/passes/menuPass.h"
+#include "independent/rendering/renderPasses/passes/UIPass.h"
+#include "independent/rendering/renderPasses/passes/blurPass.h"
 
 namespace Engine
 {
@@ -70,7 +71,8 @@ namespace Engine
 		else if (passName == "SecondPass") return new SecondPass;
 		else if (passName == "ThirdPass") return new ThirdPass;
 		else if (passName == "FourthPass") return new FourthPass;
-		else if (passName == "MenuPass") return new MenuPass;
+		else if (passName == "UIPass") return new UIPass;
+		else if (passName == "BlurPass") return new BlurPass;
 		else return nullptr;
 	}
 
@@ -315,8 +317,6 @@ namespace Engine
 			for (auto& rootEntity : sceneData["entities"])
 			{
 				std::string rootEntityName = rootEntity["name"].get<std::string>();
-
-				// First check if entity name already exists
 				if (!scene->checkRootEntityNameTaken(rootEntityName))
 				{
 					loadEntity(scene, nullptr, rootEntity);

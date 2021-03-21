@@ -36,7 +36,7 @@ namespace Engine
 				delete comp;
 			}
 		}
-		
+
 		m_components.clear();
 
 		for (auto& child : m_childEntities)
@@ -187,50 +187,6 @@ namespace Engine
 		}
 	}
 
-	//! addChildEntity()
-	/*
-	\param childName a const std::string& - The name of the child
-	\param entity an Entity* - A pointer to the entity
-	\return a bool - The success of adding the child entity
-	*/
-	bool Entity::addChildEntity(const std::string& childName, Entity* entity)
-	{
-		// Add entity
-		if (!checkChildEntityNameTaken(childName) && childName != "")
-		{
-			// If an invalid entity was provided, just exit out the function
-			if (!entity)
-			{
-				ENGINE_ERROR("[Entity::addChildEntity] An invalid entity pointer was provided for child entity name: {0} for entity: {1}.", childName, m_entityName);
-				return false;
-			}
-
-			// Set the parent scene of the entity and its name
-			m_childEntities[childName] = entity;
-			entity->setParentScene(getParentScene());
-			entity->setParentEntity(this);
-			entity->setName(childName);
-			getParentScene()->setEntityListUpdated(true);
-			return true;
-		}
-		else
-			ENGINE_ERROR("[Entity::addChildEntity] Name for child entity already taken. Cannot add. Child entity Name: {0} for entity: {1}.", childName, m_entityName);
-		return false;
-	}
-
-	//! checkChildEntityNameTaken()
-	/*!
-	\param name a const std::string& - The name of the entity
-	\return a bool - Does the entity name exist in our entity list
-	*/
-	bool Entity::checkChildEntityNameTaken(const std::string& name) const
-	{
-		// Check if the name given exists in the entity list
-		if (m_childEntities.find(name) != m_childEntities.end() && name != "")
-			return true;
-		return false;
-	}
-
 	//! setParentScene()
 	/*!
 	\param parent a Scene* - A pointer to the scene
@@ -337,6 +293,50 @@ namespace Engine
 		else
 			ENGINE_ERROR("[Entity::containsPoint] This entity does not have a valid transform. Entity Name: {0}.", m_entityName);
 
+		return false;
+	}
+
+	//! addChildEntity()
+	/*
+	\param childName a const std::string& - The name of the child
+	\param entity an Entity* - A pointer to the entity
+	\return a bool - The success of adding the child entity
+	*/
+	bool Entity::addChildEntity(const std::string& childName, Entity* entity)
+	{
+		// Add entity
+		if (!checkChildEntityNameTaken(childName) && childName != "")
+		{
+			// If an invalid entity was provided, just exit out the function
+			if (!entity)
+			{
+				ENGINE_ERROR("[Entity::addChildEntity] An invalid entity pointer was provided for child entity name: {0} for entity: {1}.", childName, m_entityName);
+				return false;
+			}
+
+			// Set the parent scene of the entity and its name
+			m_childEntities[childName] = entity;
+			entity->setParentScene(getParentScene());
+			entity->setParentEntity(this);
+			entity->setName(childName);
+			getParentScene()->setEntityListUpdated(true);
+			return true;
+		}
+		else
+			ENGINE_ERROR("[Entity::addChildEntity] Name for child entity already taken. Cannot add. Child entity Name: {0} for entity: {1}.", childName, m_entityName);
+		return false;
+	}
+
+	//! checkChildEntityNameTaken()
+	/*!
+	\param name a const std::string& - The name of the entity
+	\return a bool - Does the entity name exist in our entity list
+	*/
+	bool Entity::checkChildEntityNameTaken(const std::string& name) const
+	{
+		// Check if the name given exists in the entity list
+		if (m_childEntities.find(name) != m_childEntities.end() && name != "")
+			return true;
 		return false;
 	}
 

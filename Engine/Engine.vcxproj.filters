@@ -129,9 +129,6 @@
     <ClInclude Include="include\independent\rendering\renderPasses\passes\fourthPass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\independent\rendering\renderPasses\passes\menuPass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\independent\rendering\renderPasses\passes\secondPass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -294,6 +291,12 @@
     <ClInclude Include="include\independent\systems\systems\threadManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\independent\rendering\renderPasses\passes\blurPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\independent\rendering\renderPasses\passes\UIPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\independent\core\application.cpp">
@@ -378,9 +381,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\independent\rendering\renderPasses\passes\fourthPass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\independent\rendering\renderPasses\passes\menuPass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\independent\rendering\renderPasses\passes\secondPass.cpp">
@@ -534,6 +534,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\independent\systems\systems\threadManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\independent\rendering\renderPasses\passes\blurPass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\independent\rendering\renderPasses\passes\UIPass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

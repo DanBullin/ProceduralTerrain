@@ -1,63 +1,57 @@
-/*! \file fourthPass.cpp
+/*! \file blurPass.cpp
 *
-* \brief A fourth render pass
+* \brief A blur render pass
 *
 * \author Daniel Bullin
 *
 */
-#include "independent/rendering/renderPasses/passes/fourthPass.h"
-#include "independent/systems/components/scene.h"
+#include "independent/rendering/renderPasses/passes/blurPass.h"
 #include "independent/rendering/renderUtils.h"
-#include "independent/systems/systems/resourceManager.h"
-#include "independent/systems/systems/sceneManager.h"
+#include "independent/systems/components/scene.h"
 #include "independent/rendering/renderers/renderer2D.h"
-#include "independent/rendering/geometry/quad.h"
 
 namespace Engine
 {
-	bool FourthPass::s_initialised = false; //!< Initialise to false
+	bool BlurPass::s_initialised = false; //!< Initialise to false
 
-	//! FourthPass()
-	FourthPass::FourthPass()
+	//! BlurPass()
+	BlurPass::BlurPass()
 	{
-		m_frameBuffer = ResourceManager::getResource<FrameBuffer>("defaultFBO");
-		m_cameraUBO = ResourceManager::getResource<UniformBuffer>("CameraUBO");
-		m_subTexture = ResourceManager::getResource<SubTexture>("screenQuadSubTexture1");
-		m_screenQuadMaterial = ResourceManager::getResource<Material>("screenMaterial");
+		m_framebuffer = ResourceManager::getResource<FrameBuffer>("blur3DFBO");
 		m_previousFBO = nullptr;
+		m_subTexture = ResourceManager::getResource<SubTexture>("screenQuadSubTexture1");
+		m_screenQuadMaterial = ResourceManager::getResource<Material>("blur3DMaterial");
+		m_screenQuadShader = ResourceManager::getResource<ShaderProgram>("blur3DShader");
 		s_initialised = true;
 	}
 
-	//! ~FourthPass()
-	FourthPass::~FourthPass()
+	//! ~BlurPass()
+	BlurPass::~BlurPass()
 	{
-		m_frameBuffer = nullptr;
-		m_cameraUBO = nullptr;
+		m_framebuffer = nullptr;
+		m_previousFBO = nullptr;
 		m_subTexture = nullptr;
 		m_screenQuadMaterial = nullptr;
+		m_screenQuadShader = nullptr;
 		s_initialised = false;
 	}
 
 	//! setupPass()
-	void FourthPass::setupPass()
+	void BlurPass::setupPass()
 	{
 		RenderUtils::clearBuffers(RenderParameter::COLOR_AND_DEPTH_BUFFER_BIT, m_attachedScene->getMainCamera()->getClearColour());
 		RenderUtils::enableBlending(true);
 		RenderUtils::setDepthComparison(RenderParameter::LESS_THAN_OR_EQUAL);
-
-		Camera* cam = m_attachedScene->getMainCamera();
-		m_cameraUBO->uploadData("u_view", static_cast<void*>(&cam->getViewMatrix(false)));
-		m_cameraUBO->uploadData("u_projection", static_cast<void*>(&cam->getProjectionMatrix(false)));
 	}
 
 	//! endPass()
-	void FourthPass::endPass()
+	void BlurPass::endPass()
 	{
 		RenderUtils::enableBlending(false);
 	}
 
 	//! onAttach()
-	void FourthPass::onAttach()
+	void BlurPass::onAttach()
 	{
 		if (!m_previousFBO) m_previousFBO = m_attachedScene->getRenderPass(m_index - 1)->getFrameBuffer();
 	}
@@ -66,10 +60,10 @@ namespace Engine
 	/*!
 	\param entities a std::vector<Entity*>& - The list of entities to render
 	*/
-	void FourthPass::onRender(std::vector<Entity*>& entities)
+	void BlurPass::onRender(std::vector<Entity*>& entities)
 	{
 		// Bind the framebuffer chosen
-		m_frameBuffer->bind();
+		m_framebuffer->bind();
 
 		// Set settings
 		setupPass();
@@ -89,8 +83,8 @@ namespace Engine
 	/*!
 	\return a FrameBuffer* - The framebuffer
 	*/
-	FrameBuffer* FourthPass::getFrameBuffer()
+	FrameBuffer* BlurPass::getFrameBuffer()
 	{
-		return m_frameBuffer;
+		return m_framebuffer;
 	}
 }

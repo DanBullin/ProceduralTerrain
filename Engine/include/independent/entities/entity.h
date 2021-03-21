@@ -56,9 +56,6 @@ namespace Engine
 		std::map<std::string, Entity*>& getChildEntities(); //!< Get all the children
 		void getAllEntities(std::vector<Entity*>& entityList); //!< Get all entities belonging to this entity
 
-		bool addChildEntity(const std::string& childName, Entity* entity); //!< Add a child entity
-		bool checkChildEntityNameTaken(const std::string& name) const; //!< Returns whether the entity name has been taken
-
 		void setParentScene(Scene* parent); //!< Set the scene this entity belongs to
 		Scene* getParentScene() const; //!< Get the scene this entity belongs to
 
@@ -69,6 +66,9 @@ namespace Engine
 		const bool getDisplay() const; //!< Get whether the entity should be displayed
 
 		bool containsPoint(const glm::vec2& coordinate); //!< Returns whether the screen point is inside this entity's bounding box
+
+		bool addChildEntity(const std::string& childName, Entity* entity); //!< Add a child entity
+		bool checkChildEntityNameTaken(const std::string& name) const; //!< Returns whether the entity name has been taken
 
 		const std::vector<EntityComponent*>& getAllComponents(); //!< Get list of all components
 		template<typename T> void attach(EntityComponent* component); //!< Attach an already created component
