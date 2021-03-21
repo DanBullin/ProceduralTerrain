@@ -158,8 +158,10 @@ namespace Engine
 
 		// Tessellation UBO
 		auto tessUBO = ResourceManager::getResource<UniformBuffer>("TessellationUBO");
-		uint32_t useTess = 1;
-		tessUBO->uploadData("u_useTessellation", static_cast<void*>(&useTess));
+		uint32_t tess = ResourceManager::getConfigValue(Config::TessellationEquation);
+		uint32_t generateY = ResourceManager::getConfigValue(Config::GenerateTerrainY);
+		tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&tess));
+		tessUBO->uploadData("u_generateY", static_cast<void*>(&generateY));
 	}
 
 	//! onRender()
@@ -197,13 +199,20 @@ namespace Engine
 
 		if (m_attachedScene->getEntity("Terrain1"))
 		{
+			RenderUtils::enableFaceCulling(true);
+
 			Renderer3D::begin();
-			RenderUtils::enableWireframe(true);
+
+			if(ResourceManager::getConfigValue(Config::ShowTerrainWireframe)) RenderUtils::enableWireframe(true);
+
 			RenderUtils::enablePatchDrawing(true);
 			m_attachedScene->getEntity("Terrain1")->getComponent<NativeScript>()->onRender(Renderers::Renderer3D);
 			Renderer3D::end();
-			RenderUtils::enableWireframe(false);
 			RenderUtils::enablePatchDrawing(false);
+
+			if (ResourceManager::getConfigValue(Config::ShowTerrainWireframe)) RenderUtils::enableWireframe(false);
+
+			RenderUtils::enableFaceCulling(false);
 		}
 	}
 

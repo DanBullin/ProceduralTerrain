@@ -27,7 +27,8 @@ layout(std140) uniform Camera
 
 layout(std140) uniform Tessellation
 {
-	bool u_useTessellation;
+	int u_tessellationEquation;
+	bool u_generateY;
 };
 
 float GetTessLevel(float Distance0, float Distance1);
@@ -60,7 +61,7 @@ void main()
 
 float GetTessLevel(float Distance0, float Distance1)
 {
-	if(u_useTessellation == false)
+	if(u_tessellationEquation == 0)
 	{
 		return 1;
 	}

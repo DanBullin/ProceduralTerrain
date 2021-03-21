@@ -90,3 +90,11 @@ void Terrain::onRender(const Renderers renderer)
 		}
 	}
 }
+
+void Terrain::onKeyRelease(KeyReleasedEvent & e, const float timestep, const float totalTime)
+{
+	if (e.getKeyCode() == Keys::Z)
+	{
+		ResourceManager::setConfigValue(Config::ShowTerrainWireframe, !ResourceManager::getConfigValue(Config::ShowTerrainWireframe));
+	}
+}

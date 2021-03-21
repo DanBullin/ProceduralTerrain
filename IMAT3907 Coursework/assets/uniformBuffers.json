@@ -25,7 +25,7 @@
 		},
 		{
 			"name": "TessellationUBO",
-			"layout": [ "u_useTessellation", "Bool" ]
+			"layout": [ "u_tessellationEquation", "Int", "u_generateY", "Bool" ]
 		}
 	]	
 }

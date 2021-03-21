@@ -30,5 +30,6 @@ public:
 
 	void onAttach() override; //!< Called when attached to the entity
 	void onRender(const Renderers renderer); //!< On Render
+	void onKeyRelease(KeyReleasedEvent& e, const float timestep, const float totalTime) override; //!< Call upon key release
 };
 #endif
