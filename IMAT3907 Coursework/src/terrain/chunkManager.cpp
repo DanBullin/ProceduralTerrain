@@ -142,8 +142,8 @@ int ChunkManager::getChunksSize()
 */
 void ChunkManager::updateChunks(const glm::ivec2& playerPos)
 {
-	int currentChunkX = floor(static_cast<float>(playerPos.x) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize)));
-	int currentChunkZ = floor(static_cast<float>(playerPos.y) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize)));
+	int currentChunkX = static_cast<int>(floor(static_cast<float>(playerPos.x) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize))));
+	int currentChunkZ = static_cast<int>(floor(static_cast<float>(playerPos.y) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize))));
 
 	for (int i = -s_chunksSize; i <= s_chunksSize; i++)
 	{
@@ -152,7 +152,7 @@ void ChunkManager::updateChunks(const glm::ivec2& playerPos)
 			if (!s_chunks[{i, j}])
 				s_chunks[{i, j}] = new Chunk;
 
-			s_chunks[{i, j}]->setChunkPosition({ currentChunkX + j, currentChunkZ + i }, (s_chunkSize * s_chunkStepSize));
+			s_chunks[{i, j}]->setChunkPosition({ currentChunkX + j, currentChunkZ + i }, static_cast<float>((s_chunkSize * s_chunkStepSize)));
 		}
 	}
 }
