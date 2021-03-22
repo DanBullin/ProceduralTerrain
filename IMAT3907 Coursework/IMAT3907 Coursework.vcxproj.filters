@@ -51,6 +51,9 @@
     <ClInclude Include="include\terrain\chunk.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\terrain\chunkManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\layers\defaultLayer.cpp">
@@ -87,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\terrain\chunk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\terrain\chunkManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

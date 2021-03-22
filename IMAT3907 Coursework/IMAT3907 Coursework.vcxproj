@@ -144,6 +144,7 @@
     <ClInclude Include="include\scripts\rectangleShape.h" />
     <ClInclude Include="include\scripts\terrain.h" />
     <ClInclude Include="include\terrain\chunk.h" />
+    <ClInclude Include="include\terrain\chunkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\gameApplication.cpp" />
@@ -158,6 +159,7 @@
     <ClCompile Include="src\scripts\rectangleShape.cpp" />
     <ClCompile Include="src\scripts\terrain.cpp" />
     <ClCompile Include="src\terrain\chunk.cpp" />
+    <ClCompile Include="src\terrain\chunkManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
