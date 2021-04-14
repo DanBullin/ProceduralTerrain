@@ -10,7 +10,7 @@
 				{
 					"name": "Transform",
 					"type": "Transform",
-					"position": [ -2.0, 3.0, 0.0],
+					"position": [ -20.0, 125.0, -180.0],
 					"rotation": [ 0.0, 0.0, 0.0],
 					"scale": [ 1.0, 1.0, 1.0 ]
 				},
@@ -30,9 +30,9 @@
 				{
 					"name": "Light1",
 					"type": "DirectionalLight",
-					"direction": [ -0.2, -1.0, -0.3 ],
+					"direction": [ -0.4, -0.7, -0.3 ],
 					"ambient": [ 0.01, 0.01, 0.01 ],
-					"diffuse": [ 0.8, 0.8, 0.8 ],
+					"diffuse": [ 0.6, 0.6, 0.6 ],
 					"specular": [ 0.1, 0.1, 0.1 ]
 				},
 				{
@@ -63,49 +63,13 @@
 					"scale": [ 1.0, 1.0, 1.0 ]
 				},
 				{
-					"name": "MeshRender1",
-					"type": "MeshRender3D",
-					"modelName": "cyborg",
-					"materialName": ""
-				},
-				{
 					"name": "Script1",
 					"type": "NativeScript",
-					"scriptName": "Cyborg"
+					"scriptName": "Tree"
 				}
 			],
 			"childEntities":
 			[
-				{
-					"name": "Cyborg1",
-					"layer": "Default",
-					"display": true,
-					"components": 
-					[
-						{
-							"name": "Transform",
-							"type": "Transform",
-							"position": [ 5.0, 0.0, 0.0 ],
-							"rotation": [ 0.0, 0.0, 0.0],
-							"scale": [ 1.0, 1.0, 1.0 ]
-						},
-						{
-							"name": "MeshRender1",
-							"type": "MeshRender3D",
-							"modelName": "cyborg",
-							"materialName": ""
-						},
-						{
-							"name": "Script1",
-							"type": "NativeScript",
-							"scriptName": "Cyborg"
-						}
-					],
-					"childEntities":
-					[
-					
-					]
-				}
 			]
 		},
 		{
@@ -117,7 +81,7 @@
 				{
 					"name": "Transform",
 					"type": "Transform",
-					"position": [ 10.0, 32.0, 10.0 ],
+					"position": [ -50.0, 82.0, 10.0 ],
 					"rotation": [ 0.0, 0.0, 0.0],
 					"scale": [ 0.25, 0.25, 0.25 ]
 				},

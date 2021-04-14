@@ -27,7 +27,7 @@ namespace Engine
 		: EntityComponent(ComponentType::Transform)
 	{
 		setPosition(xPos, yPos, zPos);
-		setOrientation(xRotation, yRotation, xRotation);
+		setOrientation(xRotation, yRotation, zRotation);
 		setScale(sX, sY, sZ);
 	}
 

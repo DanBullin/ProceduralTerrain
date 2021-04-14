@@ -45,7 +45,7 @@ ChunkManager::~ChunkManager()
 void ChunkManager::start()
 {
 	createGeometry(CHUNKSIZE, CHUNKSTEPSIZE);
-	s_chunksSize = 1;
+	s_chunksSize = 3;
 }
 
 //! createGeometry
@@ -157,6 +157,14 @@ void ChunkManager::updateChunks(const glm::ivec2& playerPos)
 	}
 }
 
+glm::vec3 ChunkManager::getChunkWorldPos(const glm::ivec2& pos)
+{
+	int currentChunkX = static_cast<int>(floor(static_cast<float>(pos.x) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize))));
+	int currentChunkZ = static_cast<int>(floor(static_cast<float>(pos.y) / (static_cast<float>(s_chunkSize) * static_cast<float>(s_chunkStepSize))));
+
+	return s_chunks[{currentChunkX, currentChunkZ}]->getWorldPositon();
+}
+
 //! onRender
 /*
 \param renderer a const Renderers - The renderer to use
@@ -172,6 +180,8 @@ void ChunkManager::onRender(const Renderers renderer, const std::string& renderS
 			glm::vec3 worldPos = chunk.second->getWorldPositon();
 
 			model = glm::translate(model, { worldPos.x, worldPos.y, worldPos.z });
+			model = glm::scale(model, { 1.f, 1.f, 1.f });
+
 			for (auto& mesh : s_model->getMeshes())
 			{
 				Renderer3D::submit("Terrain", mesh.getGeometry(), mesh.getMaterial(), model);

@@ -20,6 +20,11 @@
 			"name": "cyborg", 
 			"modelFilePath": "assets/models/cyborg/cyborg.obj",
 			"materialFilePath": "assets/models/cyborg/cyborg.txt"
+		},
+		{ 
+			"name": "tree", 
+			"modelFilePath": "assets/models/tree/tree.obj",
+			"materialFilePath": "assets/models/tree/tree.txt"
 		}
 	]	
 }

@@ -6,6 +6,12 @@
 		},
 		{ 
 			"name": "heightSubTexture", "baseTextureName": "heightMap", "UVStart": [ 0.0, 0.0 ], "UVEnd": [ 1.0, 1.0 ], "ConvertBottomLeft": false
+		},
+		{ 
+			"name": "barkSubTexture", "baseTextureName": "bark", "UVStart": [ 0.0, 0.0 ], "UVEnd": [ 1.0, 1.0 ], "ConvertBottomLeft": false
+		},
+		{ 
+			"name": "leavesSubTexture", "baseTextureName": "leaves", "UVStart": [ 0.0, 0.0 ], "UVEnd": [ 1.0, 1.0 ], "ConvertBottomLeft": false
 		}
 	]
 }

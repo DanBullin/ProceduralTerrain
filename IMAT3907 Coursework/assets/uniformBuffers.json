@@ -6,6 +6,10 @@
 			"layout": [ "u_view", "Mat4", "u_projection", "Mat4", "u_viewPos", "Float3" ]
 		},
 		{ 
+			"name": "SettingsUBO",
+			"layout": [ "u_applyFog", "Bool" ]
+		},
+		{ 
 			"name": "BloomUBO",
 			"layout": [ "u_horizontal", "Bool", "u_enableBloom", "Bool" ]
 		},
@@ -26,7 +30,7 @@
 		{
 			"name": "TessellationUBO",
 			"layout": [ "u_tessellationEquation", "Int", "u_generateY", "Bool", "u_octaves", "Int", "u_scale", "Float",
-				"u_frequency", "Float", "u_amplitude", "Float", "u_amplitudeDivisor", "Float", "u_frequencyMultiplier", "Float"]
+				"u_frequency", "Float", "u_amplitude", "Float", "u_amplitudeDivisor", "Float", "u_frequencyMultiplier", "Float" ]
 		}
 	]	
 }

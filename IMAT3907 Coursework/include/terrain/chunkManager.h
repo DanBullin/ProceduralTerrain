@@ -38,6 +38,7 @@ public:
 	static int getChunksSize(); //!< Get the number of chunks along an axis
 
 	static void updateChunks(const glm::ivec2& playerPos); //!< Update all the chunks
+	static glm::vec3 getChunkWorldPos(const glm::ivec2& pos); //!< Get the chunk which contains the points world pos
 
 	void onRender(const Renderers renderer, const std::string& renderState); //!< On Render
 };

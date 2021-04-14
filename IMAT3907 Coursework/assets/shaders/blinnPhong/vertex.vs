@@ -11,6 +11,10 @@ layout (location = 11) in vec4 aTint;
 layout (location = 12) in float aShininess;
 layout (location = 13) in vec4 aSubTextureUV;
 
+float hash(float n);
+float snoise(vec3 x);
+float noise(vec3 position, int octaves);
+
 // Interface block for the outputs of the vertex shader
 out VS_OUT {
 	vec2 TexCoords1;
@@ -31,6 +35,18 @@ layout(std140) uniform Camera
 	vec3 u_viewPos;
 };
 
+layout(std140) uniform Tessellation
+{
+	int u_tessellationEquation;
+	bool u_generateY;
+	int u_octaves;
+	float u_scale;
+	float u_frequency;
+	float u_amplitude;
+	float u_amplitudeDivisor;
+	float u_frequencyMultiplier;
+};
+
 void main()
 {
     // Output the texture coordinates
@@ -49,10 +65,52 @@ void main()
 	// Output View position
 	vs_out.ViewPos = u_viewPos;
 	
-	vs_out.FragPos = vec3(aModel * vec4(aPos, 1.0));
+	// Get the model matrix used for the current terrain grid
+	mat4 model = aModel;
+	vec3 newPos = vec3(model[3][0], 0.0, model[3][2]);
+	model[3][1] = noise(newPos, u_octaves);
+	newPos = vec3(model * vec4(aPos, 1.0));
+
+	vs_out.FragPos = newPos;
+	
     vs_out.Normal = aNormal;  
 	
 	vs_out.Shininess = aShininess;
 
-    gl_Position = u_projection * u_view * aModel * vec4(aPos, 1.0);
+    gl_Position = u_projection * u_view * vec4(newPos, 1.0);
+}
+
+float hash(float n) {
+    return fract(sin(n) * 753.5453123);
+}
+
+float snoise(vec3 x)
+{
+	vec3 p = floor(x);
+	vec3 f = fract(x);
+	f = f * f * (3.0f - (2.0f * f));
+
+	float n = p.x + p.y * 157.0f + 113.0f * p.z;
+	return mix(mix(mix(hash(n + 0.0f), hash(n + 1.0f), f.x),
+		mix(hash(n + 157.0f), hash(n + 158.0f), f.x), f.y),
+		mix(mix(hash(n + 113.0f), hash(n + 114.0f), f.x),
+			mix(hash(n + 270.0f), hash(n + 271.0f), f.x), f.y), f.z);
+}
+
+float noise(vec3 position, int octaves)
+{
+	float total = 0.0;
+	float frequency = u_frequency;
+	float maxAmplitude = 0.0;
+	float amplitude = u_amplitude;
+	float scale = u_scale;
+	
+	for(int i = 0; i < octaves; i++)
+	{
+		total += snoise(position * frequency) * amplitude;
+		frequency *= u_frequencyMultiplier;
+		amplitude /= u_amplitudeDivisor;
+		maxAmplitude += amplitude;
+	}
+	return (total / maxAmplitude) * scale;
 }
