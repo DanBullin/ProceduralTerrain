@@ -59,7 +59,10 @@ namespace Engine
 	//! onAttach()
 	void FourthPass::onAttach()
 	{
-		if (!m_previousFBO) m_previousFBO = m_attachedScene->getRenderPass(m_index - 1)->getFrameBuffer();
+		if (!m_previousFBO)
+		{
+			m_previousFBO = m_attachedScene->getRenderPass(m_index-1)->getFrameBuffer();
+		}
 	}
 
 	//! onRender()
@@ -76,8 +79,16 @@ namespace Engine
 
 		Renderer2D::begin();
 
-		m_subTexture->setBaseTexture(m_previousFBO->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
+		if (m_attachedScene->getName() == "gameScene")
+			m_subTexture->setBaseTexture(m_previousFBO->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
+		else
+			m_subTexture->setBaseTexture(m_previousFBO->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
+
 		Renderer2D::submit(m_screenQuadMaterial->getShader(), m_screenQuadMaterial->getSubTextures(), Quad::getScreenQuadMatrix(), m_screenQuadMaterial->getTint());
+		/*if (m_attachedScene->getName() == "gameScene")
+			Renderer2D::submit(ResourceManager::getResource<ShaderProgram>("depthQuad"), m_screenQuadMaterial->getSubTextures(), Quad::getScreenQuadMatrix(), m_screenQuadMaterial->getTint());
+		else
+			Renderer2D::submit(m_screenQuadMaterial->getShader(), m_screenQuadMaterial->getSubTextures(), Quad::getScreenQuadMatrix(), m_screenQuadMaterial->getTint());*/
 
 		Renderer2D::end();
 

@@ -49,6 +49,13 @@
 			"layout": [ "Colour", true, "DepthAndStencil", false ],
 			"dimensions": [],
 			"useSceneSize": true
+		},
+		{ 
+			"name": "shadowMapFBO",
+			"useDefault": false,
+			"layout": [ "Depth", true ],
+			"dimensions": [ 1024, 1024 ],
+			"useSceneSize": false
 		}
 	]	
 }

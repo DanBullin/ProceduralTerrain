@@ -26,6 +26,7 @@
 #include "independent/rendering/renderPasses/passes/fourthPass.h"
 #include "independent/rendering/renderPasses/passes/UIPass.h"
 #include "independent/rendering/renderPasses/passes/blurPass.h"
+#include "independent/rendering/renderPasses/passes/depthPass.h"
 
 namespace Engine
 {
@@ -75,6 +76,7 @@ namespace Engine
 		else if (passName == "FourthPass") return new FourthPass;
 		else if (passName == "UIPass") return new UIPass;
 		else if (passName == "BlurPass") return new BlurPass;
+		else if (passName == "DepthPass") return new DepthPass;
 		else return nullptr;
 	}
 

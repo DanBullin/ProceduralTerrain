@@ -75,7 +75,7 @@ namespace Engine
 
 		Renderer2D::begin();
 
-		m_subTexture1->setBaseTexture(m_attachedScene->getRenderPass(0)->getFrameBuffer()->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
+		m_subTexture1->setBaseTexture(m_attachedScene->getRenderPass(1)->getFrameBuffer()->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
 		m_subTexture2->setBaseTexture(m_attachedScene->getRenderPass(m_index - 1)->getFrameBuffer()->getSampledTarget("Colour0"), { 0.f, 0.f }, { 1.f, 1.f }, true);
 		Renderer2D::submit(m_bloomMaterial->getShader(), m_bloomMaterial->getSubTextures(), Quad::getScreenQuadMatrix(), m_bloomMaterial->getTint());
 

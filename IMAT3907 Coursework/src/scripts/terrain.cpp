@@ -29,7 +29,6 @@ Terrain::Terrain()
 	m_amplitudeDivisor = 2.f;
 	m_frequencyMultiplier = 2.f;
 	m_playerTransform = nullptr;
-
 }
 
 //! ~Terrain()
@@ -61,20 +60,23 @@ void Terrain::onPostUpdate(const float timestep, const float totalTime)
 */
 void Terrain::onRender(const Renderers renderer, const std::string& renderState)
 {
-	if (renderer == Renderers::Renderer3D && renderState == "Terrain")
+	if (renderer == Renderers::Renderer3D)
 	{
-		m_tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&m_tessellationEquation));
-		m_tessUBO->uploadData("u_generateY", static_cast<void*>(&m_generateY));
-		m_tessUBO->uploadData("u_scale", static_cast<void*>(&m_scale));
-		m_tessUBO->uploadData("u_octaves", static_cast<void*>(&m_octaves));
-		m_tessUBO->uploadData("u_frequency", static_cast<void*>(&m_frequency));
-		m_tessUBO->uploadData("u_amplitude", static_cast<void*>(&m_amplitude));
-		m_tessUBO->uploadData("u_amplitudeDivisor", static_cast<void*>(&m_amplitudeDivisor));
-		m_tessUBO->uploadData("u_frequencyMultiplier", static_cast<void*>(&m_frequencyMultiplier));
-		if (m_drawWireframe) RenderUtils::enableWireframe(true);
+		if (renderState == "Terrain" || renderState == "TerrainDepth")
+		{
+			m_tessUBO->uploadData("u_tessellationEquation", static_cast<void*>(&m_tessellationEquation));
+			m_tessUBO->uploadData("u_generateY", static_cast<void*>(&m_generateY));
+			m_tessUBO->uploadData("u_scale", static_cast<void*>(&m_scale));
+			m_tessUBO->uploadData("u_octaves", static_cast<void*>(&m_octaves));
+			m_tessUBO->uploadData("u_frequency", static_cast<void*>(&m_frequency));
+			m_tessUBO->uploadData("u_amplitude", static_cast<void*>(&m_amplitude));
+			m_tessUBO->uploadData("u_amplitudeDivisor", static_cast<void*>(&m_amplitudeDivisor));
+			m_tessUBO->uploadData("u_frequencyMultiplier", static_cast<void*>(&m_frequencyMultiplier));
+			if (m_drawWireframe) RenderUtils::enableWireframe(true);
 
-		// Draw all chunks
-		s_chunkManager->onRender(renderer, renderState);
+			// Draw all chunks
+			s_chunkManager->onRender(renderer, renderState);
+		}
 	}
 }
 

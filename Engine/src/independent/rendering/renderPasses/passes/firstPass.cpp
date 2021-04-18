@@ -202,9 +202,6 @@ namespace Engine
 		{
 			if (entity->getLayer()->getDisplayed() && entity->getDisplay())
 			{
-				if (entity->containsComponent<MeshRender3D>())
-					entity->getComponent<MeshRender3D>()->onRender();
-
 				if (entity->containsComponent<NativeScript>())
 					entity->getComponent<NativeScript>()->onRender(Renderers::Renderer3D, "Terrain");
 			}

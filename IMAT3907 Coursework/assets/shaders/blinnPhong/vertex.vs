@@ -71,13 +71,13 @@ void main()
 	model[3][1] = noise(newPos, u_octaves);
 	newPos = vec3(model * vec4(aPos, 1.0));
 
-	vs_out.FragPos = newPos;
+	vs_out.FragPos = vec3(aModel * vec4(aPos, 1.0));
 	
     vs_out.Normal = aNormal;  
 	
 	vs_out.Shininess = aShininess;
 
-    gl_Position = u_projection * u_view * vec4(newPos, 1.0);
+    gl_Position = u_projection * u_view * aModel * vec4(aPos, 1.0);
 }
 
 float hash(float n) {

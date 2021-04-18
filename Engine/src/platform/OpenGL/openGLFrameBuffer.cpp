@@ -159,7 +159,7 @@ namespace Engine
 				}
 				case AttachmentType::Depth:
 				{
-					TextureProperties properties(size.x, size.y, "Repeat", "Repeat", "Repeat", "Linear", "Linear", false, false);
+					TextureProperties properties(size.x, size.y, "Repeat", "Repeat", "Repeat", "Nearest", "Nearest", false, false);
 					std::string textureName = "Depth";
 
 					Texture2D* depthTexture = Texture2D::create(textureName, properties, 2, nullptr);
@@ -189,8 +189,16 @@ namespace Engine
 			}
 		}
 
-		unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
-		glDrawBuffers(colourAttachmentCount, attachments);
+		if (colourAttachmentCount == 0)
+		{
+			glDrawBuffer(GL_NONE);
+			glReadBuffer(GL_NONE);
+		}
+		else
+		{
+			unsigned int attachments[2] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1 };
+			glDrawBuffers(colourAttachmentCount, attachments);
+		}
 
 		// Check if the framebuffer is complete
 		if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)

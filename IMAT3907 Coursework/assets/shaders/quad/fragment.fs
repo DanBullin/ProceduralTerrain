@@ -10,5 +10,5 @@ uniform sampler2D[16] u_textures;
 
 void main()
 {
-	 colour = texture(u_textures[texUnit], texCoord) * tint;
+	colour = texture(u_textures[texUnit], texCoord) * tint;
 }

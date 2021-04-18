@@ -122,7 +122,7 @@ namespace Engine
 
 		// Load data to GPU
 		glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, m_textureProperties.Width, m_textureProperties.Height, 0, dataFormat, type, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
+		if(channels != 2) glGenerateMipmap(GL_TEXTURE_2D);
 
 		// Store texture properties
 		m_channels = channels;

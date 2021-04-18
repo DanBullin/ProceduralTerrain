@@ -291,12 +291,12 @@ namespace Engine
 							dimensions = WindowManager::getFocusedWindow()->getProperties().getSize();
 						else
 						{
-							dimensions = glm::ivec2(buffer["size"][0], buffer["size"][1]);
+							dimensions = glm::ivec2(buffer["dimensions"][0], buffer["dimensions"][1]);
 							ENGINE_ERROR("[ResourceLoader::loadFrameBuffers] There isn't a valid focused window, cannot retrieve window dimensions.");
 						}
 					}
 					else
-						dimensions = glm::ivec2(buffer["size"][0], buffer["size"][1]);
+						dimensions = glm::ivec2(buffer["dimensions"][0], buffer["dimensions"][1]);
 
 					// Only need to provide the layout
 					newBuffer = FrameBuffer::create(name, buffer["useSceneSize"].get<bool>(), dimensions, layout);
@@ -465,7 +465,14 @@ namespace Engine
 			if (!ResourceManager::resourceExists(name))
 			{
 				// Get the base texture name
-				Texture2D* baseTexture = ResourceManager::getResource<Texture2D>(subTexture["baseTextureName"].get<std::string>());
+				Texture2D* baseTexture;
+				
+				if (subTexture["baseTextureName"].get<std::string>() == "depthMap")
+				{
+					baseTexture = ResourceManager::getResource<FrameBuffer>("shadowMapFBO")->getSampledTarget("Depth");
+				}
+				else
+					baseTexture = ResourceManager::getResource<Texture2D>(subTexture["baseTextureName"].get<std::string>());
 
 				if (baseTexture)
 				{

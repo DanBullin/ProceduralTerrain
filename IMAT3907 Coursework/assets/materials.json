@@ -18,6 +18,14 @@
 			"cubeMapTextures": [], "shader": "terrainShader", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
+			"name": "DepthMaterial", "subTextures": [ "depthSubTexture", "SpecularNoneSubTexture" ],
+			"cubeMapTextures": [], "shader": "blinnPhong", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
+		},
+		{
+			"name": "TerrainDepthMaterial", "subTextures": [ "heightSubTexture" ],
+			"cubeMapTextures": [], "shader": "terrainDepthShader", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
+		},
+		{
 			"name": "BarkMaterial", "subTextures": [ "barkSubTexture", "SpecularNoneSubTexture"  ],
 			"cubeMapTextures": [], "shader": "blinnPhong", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},

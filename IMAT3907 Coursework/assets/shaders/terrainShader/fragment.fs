@@ -3,13 +3,14 @@
 layout (location = 0) out vec4 FragColor;
 layout (location = 1) out vec4 BrightColor;
 
-in GS_OUT {
+in TES_OUT {
 	vec3 Normals;
 	vec2 TexCoords;
 	flat int TexUnit;
 	vec4 Tint;
 	vec3 ViewPos;
 	vec3 FragPos;
+	vec4 FragPosLightSpace;
 } fs_in;
 
 struct DirectionalLight {

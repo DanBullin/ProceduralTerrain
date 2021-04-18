@@ -12,6 +12,9 @@
 		},
 		{ 
 			"name": "leavesSubTexture", "baseTextureName": "leaves", "UVStart": [ 0.0, 0.0 ], "UVEnd": [ 1.0, 1.0 ], "ConvertBottomLeft": false
+		},
+		{ 
+			"name": "depthSubTexture", "baseTextureName": "depthMap", "UVStart": [ 0.0, 0.0 ], "UVEnd": [ 1.0, 1.0 ], "ConvertBottomLeft": true
 		}
 	]
 }

@@ -14,6 +14,18 @@
 			"orderImportance": 0
 		},
 		{ 
+			"name": "depthQuad", 
+			"vertexShader": "assets/shaders/depthQuad/vertex.vs", 
+			"fragmentShader": "assets/shaders/depthQuad/fragment.fs", 
+			"geometryShader": "",
+			"tessControlShader": "",
+			"tessEvaluationShader": "",
+			"vertexArray": "QuadArray",
+			"uniforms": [ "u_textures" ],
+			"uniformBuffers": [ "Camera", "CameraUBO", "LightSpace", "LightSpaceUBO" ],
+			"orderImportance": 0
+		},
+		{ 
 			"name": "textShader", 
 			"vertexShader": "assets/shaders/quad/vertex.vs", 
 			"fragmentShader": "assets/shaders/quad/fragment.fs", 

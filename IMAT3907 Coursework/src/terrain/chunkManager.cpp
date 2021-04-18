@@ -188,4 +188,20 @@ void ChunkManager::onRender(const Renderers renderer, const std::string& renderS
 			}
 		}
 	}
+	else if(renderer == Renderers::Renderer3D && renderState == "TerrainDepth")
+	{
+		for (auto& chunk : s_chunks)
+		{
+			glm::mat4 model = glm::mat4(1.f);
+			glm::vec3 worldPos = chunk.second->getWorldPositon();
+
+			model = glm::translate(model, { worldPos.x, worldPos.y, worldPos.z });
+			model = glm::scale(model, { 1.f, 1.f, 1.f });
+
+			for (auto& mesh : s_model->getMeshes())
+			{
+				Renderer3D::submit("Terrain", mesh.getGeometry(), ResourceManager::getResource<Material>("TerrainDepthMaterial") , model);
+			}
+		}
+	}
 }

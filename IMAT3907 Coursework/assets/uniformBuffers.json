@@ -6,6 +6,10 @@
 			"layout": [ "u_view", "Mat4", "u_projection", "Mat4", "u_viewPos", "Float3" ]
 		},
 		{ 
+			"name": "LightSpaceUBO",
+			"layout": [ "u_lightSpaceMatrix", "Mat4", "u_nearPlane", "Float", "u_farPlane", "Float" ]
+		},
+		{ 
 			"name": "SettingsUBO",
 			"layout": [ "u_applyFog", "Bool" ]
 		},

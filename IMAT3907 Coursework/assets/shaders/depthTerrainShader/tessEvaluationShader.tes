@@ -9,7 +9,6 @@ float hash(float n);
 float snoise(vec3 x);
 float noise(vec3 position, int octaves);
 
-
 uniform sampler2D[16] u_diffuseMap;
 
 layout(std140) uniform Camera
@@ -17,6 +16,13 @@ layout(std140) uniform Camera
 	mat4 u_view;
 	mat4 u_projection;
 	vec3 u_viewPos;
+};
+
+layout(std140) uniform LightSpace
+{
+	mat4 u_lightSpaceMatrix;
+	float u_nearPlane;
+	float u_farPlane;
 };
 
 layout(std140) uniform Tessellation
@@ -31,42 +37,17 @@ layout(std140) uniform Tessellation
 	float u_frequencyMultiplier;
 };
 
-layout(std140) uniform LightSpace
-{
-	mat4 u_lightSpaceMatrix;
-	float u_nearPlane;
-	float u_farPlane;
-};
-
 // Unedited vertex data from the TCS
 in TCS_OUT {
-	vec2 TexCoords;
-	flat int TexUnit;
-	vec4 Tint;
 	vec3 FragPos;
 	int TessLevel;
 } tes_in[];
-
-// Fragment requires vertex data
-out TES_OUT {
-	vec3 Normals;
-	vec2 TexCoords;
-	flat int TexUnit;
-	vec4 Tint;
-	vec3 ViewPos;
-	vec3 FragPos;
-	vec4 FragPosLightSpace;
-} tes_out;
 
 void main()
 {
    // interpolate the normal and xyz position using the linear interpolation function
    // use 3D because they are in three dimensions; 2D also included for uv texture coordinates
-   tes_out.TexCoords = interpolate2D(tes_in[0].TexCoords, tes_in[1].TexCoords, tes_in[2].TexCoords);
-   tes_out.TexUnit = tes_in[0].TexUnit;
-   tes_out.Tint = tes_in[0].Tint;
    vec3 pos = interpolate3D(tes_in[0].FragPos, tes_in[1].FragPos, tes_in[2].FragPos);
-   vec3 Normals = vec3(0.0, 1.0, 0.0);
  
    if(u_generateY == true)
    {
@@ -80,18 +61,11 @@ void main()
 		float l = noise(left, u_octaves);
 		float u = noise(up, u_octaves);
 		float d = noise(down, u_octaves);
-		Normals = normalize(vec3((l-r), 2.0, (u-d)));
-		
 		pos.y = noise(pos, u_octaves);
    }
    
-   tes_out.FragPos = pos;
-   tes_out.FragPosLightSpace = u_lightSpaceMatrix * vec4(pos, 1.0);
-   tes_out.ViewPos = u_viewPos;
-   tes_out.Normals = Normals;
-
    // transform vertex position to clip space  - NOTE: WE NEED TO DO IT HERE NOW and not in vertex shader
-   gl_Position = u_projection * u_view * vec4(pos, 1.0);
+   gl_Position = u_lightSpaceMatrix * vec4(pos, 1.0);
 } 
 
 vec2 interpolate2D(vec2 v0, vec2 v1, vec2 v2)
