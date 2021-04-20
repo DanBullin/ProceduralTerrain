@@ -16,6 +16,7 @@
 #include "scripts/lightTest.h"
 #include "scripts/terrain.h"
 #include "scripts/tree.h"
+#include "scripts/dirLightScript.h"
 
 #include "layers/defaultLayer.h"
 #include "layers/UILayer.h"
@@ -46,6 +47,7 @@ namespace Engine
 		else if (scriptName == "LightTest") return new LightTest;
 		else if (scriptName == "Terrain") return new Terrain;
 		else if (scriptName == "Tree") return new Tree;
+		else if (scriptName == "DirLightScript") return new DirLightScript;
 		return nullptr;
 	}
 

@@ -50,9 +50,9 @@
 				{
 					"name": "Transform",
 					"type": "Transform",
-					"position": [ -12.5, 60.12, 150.3],
+					"position": [ 52.5, 120.12, -150.3],
 					"rotation": [ 0.0, 0.0, 0.0],
-					"scale": [ 1.0, 1.0, 1.0 ]
+					"scale": [ 3.0, 3.0, 3.0 ]
 				},
 				{
 					"name": "MeshRender1",
@@ -63,10 +63,15 @@
 				{
 					"name": "Light1",
 					"type": "DirectionalLight",
-					"direction": [ -0.4, -0.7, -0.3 ],
+					"direction": [ -0.4, -0.4, -0.3 ],
 					"ambient": [ 0.01, 0.01, 0.01 ],
 					"diffuse": [ 0.6, 0.6, 0.6 ],
 					"specular": [ 0.1, 0.1, 0.1 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "DirLightScript"
 				}
 			]
 		},
@@ -122,42 +127,6 @@
 					"constant": 1.0,
 					"linear": 0.35,
 					"quadratic": 0.44
-				},
-				{
-					"name": "Script1",
-					"type": "NativeScript",
-					"scriptName": "LightTest"
-				}
-			]
-		},
-		{
-			"name": "LightSource6",
-			"layer": "Default",
-			"display": true,
-			"components": 
-			[
-				{
-					"name": "Transform",
-					"type": "Transform",
-					"position": [ -12.5, 300.12, 2.3],
-					"rotation": [ 0.0, 0.0, 0.0],
-					"scale": [ 5.0, 5.0, 5.0 ]
-				},
-				{
-					"name": "MeshRender1",
-					"type": "MeshRender3D",
-					"modelName": "sphere",
-					"materialName": "lightSourceMaterial"
-				},
-				{
-					"name": "Light1",
-					"type": "PointLight",
-					"ambient": [ 0.2, 0.2, 0.2 ],
-					"diffuse": [ 100.0, 100.0, 100.0 ],
-					"specular": [ 1.0, 1.0, 1.0 ],
-					"constant": 1.0,
-					"linear": 0.09,
-					"quadratic": 0.032
 				},
 				{
 					"name": "Script1",

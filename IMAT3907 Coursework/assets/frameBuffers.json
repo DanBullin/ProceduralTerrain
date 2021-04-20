@@ -54,7 +54,7 @@
 			"name": "shadowMapFBO",
 			"useDefault": false,
 			"layout": [ "Depth", true ],
-			"dimensions": [ 1024, 1024 ],
+			"dimensions": [ 5000, 5000 ],
 			"useSceneSize": false
 		}
 	]	

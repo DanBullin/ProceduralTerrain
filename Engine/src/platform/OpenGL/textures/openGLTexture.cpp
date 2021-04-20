@@ -80,6 +80,12 @@ namespace Engine
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, toGLType(m_textureProperties.WrapT));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, toGLType(m_textureProperties.WrapR));
 
+		if (toGLType(m_textureProperties.WrapS) == GL_CLAMP_TO_BORDER)
+		{
+			float borderColor[] = { 1.0, 1.0, 1.0, 1.0 };
+			glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+		}
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, toGLType(m_textureProperties.MinFilter));
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, toGLType(m_textureProperties.MaxFilter));
 

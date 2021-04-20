@@ -79,10 +79,47 @@ uniform sampler2D[16] u_diffuseMap;
 
 const float shininess = 32.0;
 
+float ShadowCalculation(DirectionalLight light, vec4 fragPosLightSpace)
+{
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+	
+    // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+    float closestDepth = texture(u_diffuseMap[fs_in.TexUnit], projCoords.xy).r; 
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+    // calculate bias (based on depth map resolution and slope)
+    vec3 normal = normalize(fs_in.Normals);
+    vec3 lightDir = normalize((light.direction).xyz - fs_in.FragPos);
+    float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
+    // check whether current frag pos is in shadow
+    // float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
+    // PCF
+    float shadow = 0.0;
+    vec2 texelSize = 1.0 / textureSize(u_diffuseMap[fs_in.TexUnit], 0);
+    for(int x = -1; x <= 1; ++x)
+    {
+        for(int y = -1; y <= 1; ++y)
+        {
+            float pcfDepth = texture(u_diffuseMap[fs_in.TexUnit], projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;        
+        }    
+    }
+    shadow /= 9.0;
+    
+    // keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
+    if(projCoords.z > 1.0)
+        shadow = 0.0;
+        
+    return shadow;
+}
+
 // Calculates the color when using a directional light.
 vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir, vec3 Colour)
 {
-    vec3 lightDir = normalize(-(light.direction).xyz);
+    vec3 lightDir = normalize((light.direction).xyz - fs_in.FragPos);
     // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // specular shading
@@ -92,7 +129,9 @@ vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir, vec3 Colour
     vec3 ambient = (light.ambient).xyz * Colour;
     vec3 diffuse = (light.diffuse).xyz * diff * Colour;
     vec3 specular = (light.specular).xyz * spec * vec3(0.0, 0.0, 0.0);
-    return (ambient + diffuse + specular);
+	
+	float shadow = ShadowCalculation(light, fs_in.FragPosLightSpace);
+    return (ambient + (1.0 - shadow) * (diffuse + specular));
 }
 
 // Calculates the color when using a point light.
@@ -184,8 +223,8 @@ void main()
 	
 	if(dirLight.direction != vec4(0.0, 0.0, 0.0, 0.0))
 		result += CalcDirLight(dirLight, norm, viewDir, col);
-
-    for(int i = 0; i < 10; i++)
+	
+	for(int i = 0; i < 10; i++)
 	{
 		if(pointLight[i].constant != 1.0)
 			break;
@@ -200,6 +239,7 @@ void main()
 		
 		result += CalcSpotLight(spotLight[i], norm, fs_in.FragPos, viewDir, col); 	
 	}
+
 	
 	float distanceFromCamera = distance(fs_in.ViewPos, fs_in.FragPos);
 	float visibility = exp(-pow((distanceFromCamera*0.02), 1.2));

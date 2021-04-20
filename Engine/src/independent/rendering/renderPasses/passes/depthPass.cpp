@@ -49,7 +49,7 @@ namespace Engine
 		glm::mat4 lightProjection, lightView, lightSpaceMatrix;
 		float near_plane = cam->getProjection().NearPlane, far_plane = cam->getProjection().FarPlane;
 
-		lightProjection = glm::ortho(-100.0f, 100.0f, -100.0f, 100.0f, near_plane, far_plane);
+		lightProjection = glm::ortho(-1000.0f, 1000.0f, -1000.0f, 1000.0f, near_plane, far_plane);
 		lightView = glm::lookAt(dirLights[0]->getParent()->getComponent<Transform>()->getPosition(), glm::vec3(0.f, 30.f, 0.f), glm::vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 

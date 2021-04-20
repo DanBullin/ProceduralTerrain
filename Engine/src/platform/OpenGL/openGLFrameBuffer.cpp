@@ -159,7 +159,7 @@ namespace Engine
 				}
 				case AttachmentType::Depth:
 				{
-					TextureProperties properties(size.x, size.y, "Repeat", "Repeat", "Repeat", "Nearest", "Nearest", false, false);
+					TextureProperties properties(size.x, size.y, "ClampToBorder", "ClampToBorder", "ClampToBorder", "Nearest", "Nearest", false, false);
 					std::string textureName = "Depth";
 
 					Texture2D* depthTexture = Texture2D::create(textureName, properties, 2, nullptr);
