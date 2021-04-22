@@ -92,7 +92,7 @@ float ShadowCalculation(DirectionalLight light, vec4 fragPosLightSpace)
     float currentDepth = projCoords.z;
     // calculate bias (based on depth map resolution and slope)
     vec3 normal = normalize(fs_in.Normals);
-    vec3 lightDir = normalize((light.direction).xyz - fs_in.FragPos);
+    vec3 lightDir = normalize((light.direction).xyz);
     float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
     // check whether current frag pos is in shadow
     // float shadow = currentDepth - bias > closestDepth  ? 1.0 : 0.0;
@@ -119,7 +119,7 @@ float ShadowCalculation(DirectionalLight light, vec4 fragPosLightSpace)
 // Calculates the color when using a directional light.
 vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir, vec3 Colour)
 {
-    vec3 lightDir = normalize((light.direction).xyz - fs_in.FragPos);
+    vec3 lightDir = normalize((light.direction).xyz);
     // diffuse shading
     float diff = max(dot(normal, lightDir), 0.0);
     // specular shading
@@ -239,10 +239,13 @@ void main()
 		
 		result += CalcSpotLight(spotLight[i], norm, fs_in.FragPos, viewDir, col); 	
 	}
-
-	
+	// float lambda = 4 ;
+    // e = 2.71828 ; e^-lambda*dist
+	// max(0, e - 150)
 	float distanceFromCamera = distance(fs_in.ViewPos, fs_in.FragPos);
-	float visibility = exp(-pow((distanceFromCamera*0.02), 1.2));
+	float visibility = 1.0;
+	
+	visibility = max(0, pow(2.71828, -0.01*(distanceFromCamera-150)));
 	visibility = clamp(visibility, 0.0, 1.0);
 	
 	if(u_applyFog == true)

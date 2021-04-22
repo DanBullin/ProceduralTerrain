@@ -50,7 +50,7 @@ namespace Engine
 		float near_plane = cam->getProjection().NearPlane, far_plane = cam->getProjection().FarPlane;
 
 		lightProjection = glm::ortho(-1000.0f, 1000.0f, -1000.0f, 1000.0f, near_plane, far_plane);
-		lightView = glm::lookAt(dirLights[0]->getParent()->getComponent<Transform>()->getPosition(), glm::vec3(0.f, 30.f, 0.f), glm::vec3(0.0, 1.0, 0.0));
+		lightView = glm::lookAt(dirLights[0]->getParent()->getComponent<Transform>()->getPosition(), dirLights[0]->getParent()->getComponent<Transform>()->getPosition() + dirLights[0]->getDirection(), glm::vec3(0.0, 1.0, 0.0));
 		lightSpaceMatrix = lightProjection * lightView;
 
 		m_lightSpaceUBO->uploadData("u_lightSpaceMatrix", static_cast<void*>(&lightSpaceMatrix));

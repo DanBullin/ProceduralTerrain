@@ -53,7 +53,7 @@ namespace Engine
 		DirectionalLightSDT dirLightSDT;
 		if (dirLights.size() != 0)
 		{
-			dirLightSDT.direction = glm::vec4(dirLights[0]->getParent()->getComponent<Transform>()->getPosition(), 0.f);
+			dirLightSDT.direction = glm::vec4(dirLights[0]->getDirection(), 0.f);
 			dirLightSDT.ambient = glm::vec4(dirLights[0]->getAmbientFactor(), 0.f);
 			dirLightSDT.diffuse = glm::vec4(dirLights[0]->getDiffuseFactor(), 0.f);
 			dirLightSDT.specular = glm::vec4(dirLights[0]->getSpecularFactor(), 0.f);

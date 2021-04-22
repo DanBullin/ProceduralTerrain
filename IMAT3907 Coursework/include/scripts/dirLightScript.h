@@ -26,5 +26,6 @@ public:
 	DirLightScript(); //!< Constructor
 	~DirLightScript(); //!< Destructor
 	void onPreUpdate(const float timestep, const float totalTime) override; //!< Call before game update
+	void onKeyRelease(KeyReleasedEvent& e, const float timestep, const float totalTime) override; //!< Call upon key release
 };
 #endif

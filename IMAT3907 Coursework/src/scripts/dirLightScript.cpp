@@ -35,3 +35,16 @@ void DirLightScript::onPreUpdate(const float timestep, const float totalTime)
 
 	m_distance += m_increment;
 }
+
+void DirLightScript::onKeyRelease(KeyReleasedEvent & e, const float timestep, const float totalTime)
+{
+	if (e.getKeyCode() == Keys::U)
+	{
+		getParent()->getComponent<DirectionalLight>()->setDirection({ 0.f, 1.f, 0.f });
+	}
+
+	if (e.getKeyCode() == Keys::I)
+	{
+		getParent()->getComponent<DirectionalLight>()->setDirection({ 0.4f, 0.2f, -0.1f });
+	}
+}
