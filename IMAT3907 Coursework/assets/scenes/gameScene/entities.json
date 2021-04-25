@@ -42,6 +42,46 @@
 			]
 		},
 		{
+			"name": "Terrain1",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 0.0, 0.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Terrain"
+				}
+			]
+		},
+		{
+			"name": "Empty2",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 0.0, 0.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Environment"
+				}
+			]
+		},
+		{
 			"name": "DirLight",
 			"layer": "Default",
 			"display": true,
@@ -159,26 +199,6 @@
 					"name": "Script1",
 					"type": "NativeScript",
 					"scriptName": "FPSCounter"
-				}
-			]
-		},
-		{
-			"name": "Terrain1",
-			"layer": "Default",
-			"display": true,
-			"components": 
-			[
-				{
-					"name": "Transform",
-					"type": "Transform",
-					"position": [ 0.0, 0.0, 0.0 ],
-					"rotation": [ 0.0, 0.0, 0.0],
-					"scale": [ 1.0, 1.0, 1.0 ]
-				},
-				{
-					"name": "Script1",
-					"type": "NativeScript",
-					"scriptName": "Terrain"
 				}
 			]
 		}

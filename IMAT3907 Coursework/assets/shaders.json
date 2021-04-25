@@ -10,7 +10,7 @@
 			"tessEvaluationShader": "",
 			"vertexArray": "vertexArray1",
 			"uniforms": [ "u_diffuseMap" ],
-			"uniformBuffers": [ "Camera", "CameraUBO", "Tessellation", "TessellationUBO", "DirectionalLights", "DirLightUBO", "PointLights", "PointLightUBO", "SpotLights", "SpotLightUBO" ],
+			"uniformBuffers": [ "Camera", "CameraUBO", "Tessellation", "TessellationUBO", "DirectionalLights", "DirLightUBO", "PointLights", "PointLightUBO", "SpotLights", "SpotLightUBO", "Settings", "SettingsUBO" ],
 			"orderImportance": 0
 		},
 		{ 

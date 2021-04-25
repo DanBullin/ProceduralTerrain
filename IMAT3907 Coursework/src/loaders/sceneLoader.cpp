@@ -17,6 +17,8 @@
 #include "scripts/terrain.h"
 #include "scripts/tree.h"
 #include "scripts/dirLightScript.h"
+#include "scripts/cameraRotationScript.h"
+#include "scripts/environment.h"
 
 #include "layers/defaultLayer.h"
 #include "layers/UILayer.h"
@@ -48,6 +50,8 @@ namespace Engine
 		else if (scriptName == "Terrain") return new Terrain;
 		else if (scriptName == "Tree") return new Tree;
 		else if (scriptName == "DirLightScript") return new DirLightScript;
+		else if (scriptName == "CameraRotationScript") return new CameraRotationScript;
+		else if (scriptName == "Environment") return new Environment;
 		return nullptr;
 	}
 

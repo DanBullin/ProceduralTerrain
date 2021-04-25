@@ -136,8 +136,10 @@
     <ClInclude Include="include\layers\defaultLayer.h" />
     <ClInclude Include="include\layers\UILayer.h" />
     <ClInclude Include="include\loaders\sceneLoader.h" />
+    <ClInclude Include="include\scripts\cameraRotationScript.h" />
     <ClInclude Include="include\scripts\cyborg.h" />
     <ClInclude Include="include\scripts\dirLightScript.h" />
+    <ClInclude Include="include\scripts\environment.h" />
     <ClInclude Include="include\scripts\FPSCounter.h" />
     <ClInclude Include="include\scripts\lightTest.h" />
     <ClInclude Include="include\scripts\mainMenu\menuText.h" />
@@ -153,8 +155,10 @@
     <ClCompile Include="src\layers\defaultLayer.cpp" />
     <ClCompile Include="src\layers\UILayer.cpp" />
     <ClCompile Include="src\loaders\sceneLoader.cpp" />
+    <ClCompile Include="src\scripts\cameraRotationScript.cpp" />
     <ClCompile Include="src\scripts\cyborg.cpp" />
     <ClCompile Include="src\scripts\dirLightScript.cpp" />
+    <ClCompile Include="src\scripts\environment.cpp" />
     <ClCompile Include="src\scripts\FPSCounter.cpp" />
     <ClCompile Include="src\scripts\lightTest.cpp" />
     <ClCompile Include="src\scripts\mainMenu\menuText.cpp" />

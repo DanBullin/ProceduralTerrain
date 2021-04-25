@@ -10,7 +10,7 @@
 				{
 					"name": "Transform",
 					"type": "Transform",
-					"position": [ 0.0, 3.0, 0.0],
+					"position": [ 0.0, 30.0, 0.0],
 					"rotation": [ 0.0, 0.0, 0.0],
 					"scale": [ 1.0, 1.0, 1.0 ]
 				},
@@ -30,7 +30,7 @@
 				{
 					"name": "Script1",
 					"type": "NativeScript",
-					"scriptName": "Player"
+					"scriptName": "CameraRotationScript"
 				}
 			]
 		},
@@ -129,6 +129,60 @@
 					"name": "Script1",
 					"type": "NativeScript",
 					"scriptName": "MenuText"
+				}
+			]
+		},
+		{
+			"name": "DirLight",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 52.5, 120.12, -150.3],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 3.0, 3.0, 3.0 ]
+				},
+				{
+					"name": "MeshRender1",
+					"type": "MeshRender3D",
+					"modelName": "sphere",
+					"materialName": "defaultMaterial3D"
+				},
+				{
+					"name": "Light1",
+					"type": "DirectionalLight",
+					"direction": [ -0.3, 0.6, -0.2 ],
+					"ambient": [ 0.3, 0.3, 0.3 ],
+					"diffuse": [ 0.8, 0.8, 0.8 ],
+					"specular": [ 0.1, 0.1, 0.1 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "DirLightScript"
+				}
+			]
+		},
+		{
+			"name": "Terrain1",
+			"layer": "Default",
+			"display": true,
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"type": "Transform",
+					"position": [ 0.0, 0.0, 0.0 ],
+					"rotation": [ 0.0, 0.0, 0.0],
+					"scale": [ 1.0, 1.0, 1.0 ]
+				},
+				{
+					"name": "Script1",
+					"type": "NativeScript",
+					"scriptName": "Terrain"
 				}
 			]
 		}

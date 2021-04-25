@@ -62,6 +62,11 @@ layout(std140) uniform SpotLights
 	SpotLight spotLight[10];
 };
 
+layout(std140) uniform Settings
+{
+	bool u_applyFog;
+};
+
 // Calculates the color when using a directional light.
 vec3 CalcDirLight(DirectionalLight light, vec3 normal, vec3 viewDir)
 {
@@ -159,6 +164,17 @@ void main()
 		
 		result += CalcSpotLight(spotLight[i], norm, fs_in.FragPos, viewDir); 	
 	} 
+	
+	float distanceFromCamera = distance(fs_in.ViewPos, fs_in.FragPos);
+	float visibility = 1.0;
+	
+	visibility = max(0, pow(2.71828, -0.01*(distanceFromCamera-150)));
+	visibility = clamp(visibility, 0.0, 1.0);
+	
+	if(u_applyFog == true)
+	{
+		result = mix(vec3(0.5, 0.5, 0.5), result, visibility);
+	}
 
 	// check whether result is higher than some threshold, if so, output as bloom threshold color
     float brightness = dot(result, vec3(0.2126, 0.7152, 0.0722));
