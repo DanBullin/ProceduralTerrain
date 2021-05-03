@@ -30,6 +30,11 @@
 			"name": "vertexArray3",
 			"vertexBuffers": [ "TerrainVertexBuffer", "ModelInstanceBuffer", "TexUnit1InstanceBuffer", "TintInstanceBuffer", "UV1InstanceBuffer" ],
 			"indexBuffer": "IndexBuffer3D"
+		},
+		{ 
+			"name": "vertexArray4",
+			"vertexBuffers": [ "Vertex3DBuffer", "ModelInstanceBuffer", "TexUnit1InstanceBuffer", "TintInstanceBuffer" ],
+			"indexBuffer": "IndexBuffer3D"
 		}
 	]	
 }

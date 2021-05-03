@@ -1,2 +1,0 @@
-Simulation of Real-Time Explosion Smoke Based on Simplex-Noise ]
-ThinMatrix - Fog

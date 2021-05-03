@@ -14,23 +14,23 @@
 			"cubeMapTextures": [], "shader": "lightSource", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
-			"name": "TerrainMaterial", "subTextures": [ "heightSubTexture" ],
+			"name": "TerrainMaterial", "subTextures": [ "depthSubTexture" ],
 			"cubeMapTextures": [], "shader": "terrainShader", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
-			"name": "DepthMaterial", "subTextures": [ "depthSubTexture", "SpecularNoneSubTexture" ],
-			"cubeMapTextures": [], "shader": "blinnPhong", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
+			"name": "DepthMaterial", "subTextures": [ "depthSubTexture" ],
+			"cubeMapTextures": [], "shader": "flatTexShader", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
-			"name": "TerrainDepthMaterial", "subTextures": [ "heightSubTexture" ],
+			"name": "TerrainDepthMaterial", "subTextures": [ "depthSubTexture" ],
 			"cubeMapTextures": [], "shader": "terrainDepthShader", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
-			"name": "BarkMaterial", "subTextures": [ "barkSubTexture", "SpecularNoneSubTexture"  ],
+			"name": "BarkMaterial", "subTextures": [ "barkSubTexture", "depthSubTexture"  ],
 			"cubeMapTextures": [], "shader": "blinnPhong", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		},
 		{
-			"name": "leavesMaterial", "subTextures": [ "leavesSubTexture", "SpecularNoneSubTexture" ],
+			"name": "leavesMaterial", "subTextures": [ "leavesSubTexture", "depthSubTexture" ],
 			"cubeMapTextures": [], "shader": "blinnPhong", "tint": [ 1.0, 1.0, 1.0, 1.0], "shininess": 32
 		}
 	]

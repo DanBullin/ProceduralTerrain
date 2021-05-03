@@ -111,6 +111,8 @@ namespace Engine
 				generateLightSource(batchEntries);
 			else if (batchEntries.at(0).shader->getVertexArray()->getName() == "vertexArray3")
 				generateTerrain(batchEntries);
+			else if (batchEntries.at(0).shader->getVertexArray()->getName() == "vertexArray4")
+				generateBlankTexture(batchEntries);
 		}
 	}
 
@@ -208,5 +210,23 @@ namespace Engine
 		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(2)->edit(unit1InstanceData.data(), sizeof(int32_t) * static_cast<uint32_t>(batchEntries.size()), 0);
 		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(3)->edit(tintInstanceData.data(), sizeof(glm::vec4) * static_cast<uint32_t>(batchEntries.size()), 0);
 		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(4)->edit(subTextureUVs.data(), sizeof(glm::vec4) * static_cast<uint32_t>(batchEntries.size()), 0);
+	}
+
+	void generateBlankTexture(std::vector<BatchEntry3D>& batchEntries)
+	{
+		std::vector<glm::mat4> modelInstanceData; //!< The model matrix instance data
+		std::vector<glm::vec4> tintInstanceData; //!< The tint instance data
+		std::vector<int32_t> unit1InstanceData; //!< The texture unit data
+
+		for (auto& entry : batchEntries)
+		{
+			modelInstanceData.push_back(entry.modelMatrix);
+			unit1InstanceData.push_back(entry.textureUnits[0]);
+			tintInstanceData.push_back(entry.tint);
+		}
+
+		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(1)->edit(modelInstanceData.data(), sizeof(glm::mat4) * static_cast<uint32_t>(batchEntries.size()), 0);
+		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(2)->edit(unit1InstanceData.data(), sizeof(int32_t) * static_cast<uint32_t>(batchEntries.size()), 0);
+		batchEntries.at(0).shader->getVertexArray()->getVertexBuffers().at(3)->edit(tintInstanceData.data(), sizeof(glm::vec4) * static_cast<uint32_t>(batchEntries.size()), 0);
 	}
 }

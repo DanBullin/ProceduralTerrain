@@ -30,7 +30,7 @@
 				{
 					"name": "CController",
 					"type": "CharacterController",
-					"speed": 10.0,
+					"speed": 40.0,
 					"sensitivity": 0.15,
 					"frozen": false
 				},
@@ -90,7 +90,7 @@
 				{
 					"name": "Transform",
 					"type": "Transform",
-					"position": [ 52.5, 120.12, -150.3],
+					"position": [ 52.5, 60.12, -150.3],
 					"rotation": [ 0.0, 0.0, 0.0],
 					"scale": [ 3.0, 3.0, 3.0 ]
 				},
@@ -103,7 +103,7 @@
 				{
 					"name": "Light1",
 					"type": "DirectionalLight",
-					"direction": [ -0.4, 0.4, -0.3 ],
+					"direction": [ -0.4, 0.5, -0.3 ],
 					"ambient": [ 0.01, 0.01, 0.01 ],
 					"diffuse": [ 0.6, 0.6, 0.6 ],
 					"specular": [ 0.1, 0.1, 0.1 ]

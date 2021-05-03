@@ -14,6 +14,18 @@
 			"orderImportance": 0
 		},
 		{ 
+			"name": "flatTexShader", 
+			"vertexShader": "assets/shaders/flatTexShader/vertex.vs", 
+			"fragmentShader": "assets/shaders/flatTexShader/fragment.fs", 
+			"geometryShader": "",
+			"tessControlShader": "",
+			"tessEvaluationShader": "",
+			"vertexArray": "vertexArray4",
+			"uniforms": [ "u_diffuseMap" ],
+			"uniformBuffers": [ "Camera", "CameraUBO" ],
+			"orderImportance": 0
+		},
+		{ 
 			"name": "lightSource", 
 			"vertexShader": "assets/shaders/lightSource/vertex.vs", 
 			"fragmentShader": "assets/shaders/lightSource/fragment.fs", 

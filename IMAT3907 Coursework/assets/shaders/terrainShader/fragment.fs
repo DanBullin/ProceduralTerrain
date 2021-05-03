@@ -99,15 +99,15 @@ float ShadowCalculation(DirectionalLight light, vec4 fragPosLightSpace)
     // PCF
     float shadow = 0.0;
     vec2 texelSize = 1.0 / textureSize(u_diffuseMap[fs_in.TexUnit], 0);
-    for(int x = -1; x <= 1; ++x)
+    for(int x = -1; x <= 8; ++x)
     {
-        for(int y = -1; y <= 1; ++y)
+        for(int y = -1; y <= 8; ++y)
         {
             float pcfDepth = texture(u_diffuseMap[fs_in.TexUnit], projCoords.xy + vec2(x, y) * texelSize).r; 
             shadow += currentDepth - bias > pcfDepth  ? 1.0 : 0.0;        
         }    
     }
-    shadow /= 9.0;
+    shadow /= 64.0;
     
     // keep the shadow at 0.0 when outside the far_plane region of the light's frustum.
     if(projCoords.z > 1.0)

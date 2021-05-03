@@ -26,6 +26,7 @@ out VS_OUT {
 	vec3 Normal;
 	vec3 FragPos;
 	float Shininess;
+	vec4 FragPosLightSpace;
 } vs_out;
 
 layout(std140) uniform Camera
@@ -45,6 +46,13 @@ layout(std140) uniform Tessellation
 	float u_amplitude;
 	float u_amplitudeDivisor;
 	float u_frequencyMultiplier;
+};
+
+layout(std140) uniform LightSpace
+{
+	mat4 u_lightSpaceMatrix;
+	float u_nearPlane;
+	float u_farPlane;
 };
 
 void main()
@@ -72,6 +80,7 @@ void main()
 	newPos = vec3(model * vec4(aPos, 1.0));
 
 	vs_out.FragPos = vec3(aModel * vec4(aPos, 1.0));
+	vs_out.FragPosLightSpace = u_lightSpaceMatrix * vec4(vs_out.FragPos, 1.0);
 	
     vs_out.Normal = aNormal;  
 	
